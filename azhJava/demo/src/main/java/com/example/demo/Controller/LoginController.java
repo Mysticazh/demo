@@ -18,7 +18,7 @@ public class LoginController {
     @RequestMapping("/index")
     public String index(@RequestBody User user) {
         if(loginService.loginService(user)!=null){
-            return "SUCCESS";
+            return "SUCCESS ";
         }
         else {
             return "PASSWORD_ERR";
