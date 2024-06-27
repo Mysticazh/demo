@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+</head>
+<body>
+    <form action="">
+        用户名：<input type="text" id="username" name="username"/>
+        密码：<input type="password" id="password" name="password"/>
+<!--        <input type="submit",name="登录"/>-->
+    </form>
+    <button onclick="login()">登录</button>
+<script>
+    function login() {
+        var opt = {
+            username: $("#username").val(),
+            password: $("#password").val()
+        };
+        console.log(JSON.stringify(opt))
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "/index",
+            data: JSON.stringify(opt),
+            success: function (result) {
+                if (result == "USER_NOT_EXIST") {
+                    alert("用户不存在")
+                } else if (result == "ACCOUNT_OLD") {
+                    alert("账号已被冻结，请联系管理员")
+                } else if (result == "PASSWORD_ERR") {
+                    alert("密码错误")
+                } else {
+                    window.location.href = "index.html";
+                }
+            },
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+</script>
+</body>
+</html>
