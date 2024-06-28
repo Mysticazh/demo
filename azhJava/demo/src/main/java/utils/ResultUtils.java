@@ -6,7 +6,7 @@ public class ResultUtils {
         return new Result<>(200, data,"success");
     }
 
-    // 失败
+    // 失败 
     public static <T> Result<T> failed(Integer code, String message, String description){
         return new Result<>(code,null,message,description);
     }
