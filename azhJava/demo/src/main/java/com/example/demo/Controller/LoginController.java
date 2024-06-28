@@ -16,7 +16,9 @@ public class LoginController {
     }
     @ResponseBody
     @RequestMapping("/index")
-    public String index(@RequestBody User user) {
+    public String index(@RequestParam("username")String username,@RequestParam("password")String password) {
+        System.out.println(username+password+"okok");
+        User user = new User(username,password,"");
         if(loginService.loginService(user)!=null){
             return "SUCCESS ";
         }

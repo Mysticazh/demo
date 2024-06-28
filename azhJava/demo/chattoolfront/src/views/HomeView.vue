@@ -8,7 +8,7 @@
           ref="loginForm"
           label-width="0px"
       >
-        <el-form-item label="" prop="account" style="margin-top: 10px">
+        <el-form-item label="" prop="username" style="margin-top: 10px">
           <el-row>
             <el-col :span="2">
               <span class="el-icon-s-custom"></span>
@@ -17,13 +17,13 @@
               <el-input
                   class="inps"
                   placeholder="账号"
-                  v-model="loginForm.account"
+                  v-model="loginForm.username"
               >
               </el-input>
             </el-col>
           </el-row>
         </el-form-item>
-        <el-form-item label="" prop="passWord">
+        <el-form-item label="" prop="password">
           <el-row>
             <el-col :span="2">
               <span class="el-icon-lock"></span>
@@ -33,7 +33,7 @@
                   class="inps"
                   type="password"
                   placeholder="密码"
-                  v-model="loginForm.passWord"
+                  v-model="loginForm.password"
               ></el-input>
             </el-col>
           </el-row>
@@ -56,18 +56,19 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Login",
   data: function () {
     return {
       loginForm: {
-        account: "",
-        passWord: "",
+        username: "",
+        password: "",
       },
       loginRules: {
-        account: [{ required: true, message: "请输入账号", trigger: "blur" }],
-        passWord: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        username: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
     };
   },
@@ -75,24 +76,36 @@ export default {
   methods: {
     ...mapMutations(["changeLogin"]),
     submitForm() {
-      const userAccount = this.loginForm.account;
-      const userPassword = this.loginForm.passWord;
-      if (!userAccount) {
+      let params = {
+        username: this.loginForm.username,
+        password: this.loginForm.password
+      };
+      console.log(params);
+      var url = "http://localhost:8081/index";
+
+      axios.get(url, {
+        params: params
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+
+      if (!params.username) {
         return this.$message({
           type: "error",
           message: "账号不能为空！",
         });
       }
-      if (!userPassword) {
+      if (!params.password) {
         return this.$message({
           type: "error",
           message: "密码不能为空！",
         });
       }
-      console.log("用户输入的账号为：", userAccount);
-      console.log("用户输入的密码为：", userPassword);
-
-    },
+      console.log("用户输入的账号为：", params.username);
+      console.log("用户输入的密码为：", params.password);
+    }
   },
 };
 </script>
