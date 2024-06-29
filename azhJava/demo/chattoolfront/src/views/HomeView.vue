@@ -57,6 +57,8 @@
 <script>
 import { mapMutations } from "vuex";
 import axios from "axios";
+import router from "@/router";
+
 
 export default {
   name: "Login",
@@ -82,15 +84,6 @@ export default {
       };
       console.log(params);
       var url = "http://localhost:8081/index";
-
-      axios.get(url, {
-        params: params
-      }).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
-
       if (!params.username) {
         return this.$message({
           type: "error",
@@ -101,6 +94,21 @@ export default {
         return this.$message({
           type: "error",
           message: "密码不能为空！",
+        });
+      }
+      else{
+        axios.get(url, {
+          params: params
+        }).then(function (response) {
+          const isSuccess = response.data;
+          if(isSuccess  === 'SUCCESS'){
+            router.push('/about');
+          }
+          if(response.data==="PASSWORD_ERR"){
+            window.alert("密码错误！");
+          }
+        }).catch(function (error) {
+          console.log(error);
         });
       }
       console.log("用户输入的账号为：", params.username);

@@ -20,7 +20,7 @@ public class LoginController {
         System.out.println(username+password+"okok");
         User user = new User(username,password,"");
         if(loginService.loginService(user)!=null){
-            return "SUCCESS ";
+            return "SUCCESS";
         }
         else {
             return "PASSWORD_ERR";
