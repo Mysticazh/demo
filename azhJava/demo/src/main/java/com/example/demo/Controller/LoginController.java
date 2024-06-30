@@ -5,36 +5,37 @@ import com.example.demo.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import utils.Result;
 
 @Controller
 public class LoginController {
     @Autowired
     private LoginService loginService;
+
     @RequestMapping("/")
     public String login() {
         return "login.html";
     }
+
     @ResponseBody
     @RequestMapping("/index")
-    public String index(@RequestParam("username")String username,@RequestParam("password")String password) {
-        System.out.println(username+password+"okok");
-        User user = new User(username,password,"");
-        if(loginService.loginService(user)!=null){
+    public String index(@RequestParam("username") String username, @RequestParam("password") String password) {
+        User user = new User(username, password, "");
+        if (loginService.loginService(user) != null) {
             return "SUCCESS";
-        }
-        else {
+        } else {
             return "PASSWORD_ERR";
         }
-        /*if (!user.getUsername().equals("azh") ) {
-            return "USER_NOT_EXIST";
-        }
-        if(user.getPassword().equals("000")){
-            return "ACCOUNT_OLD";
-        }
-        if(!user.getPassword().equals("123")){
-            return "PASSWORD_ERR";
-        }
-        return "SUCCESS";*/
+
+    }
+    @ResponseBody
+    @RequestMapping("register")
+    public String register(@RequestParam("username") String username,@RequestParam("password") String password,
+                           @RequestParam("name") String name,@RequestParam("confirmPassword") String confirmPassword){
+        User user = new User(username, password, name);
+
+            return loginService.registService(user);
+
     }
 }
 

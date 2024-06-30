@@ -15,4 +15,16 @@ public class LoginServiceimpl implements LoginService {
         User nowUser=loginDao.getUserbypwd(user.getUsername(),user.getPassword());
         return nowUser;
     }
+
+    @Override
+    public String registService(User user) {
+        User nowUser= loginDao.selectbyid(user.getUsername());
+        if(nowUser!=null){
+            return "isExist";
+        }
+        if(loginDao.insert(user.getUsername(), user.getPassword(), user.getName())){
+            return "SUCCESS";
+        }
+        return "error";
+    }
 }

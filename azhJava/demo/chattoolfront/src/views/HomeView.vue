@@ -125,7 +125,7 @@ margin: 0;
 height: 100vh;
 font-size: 16px;
 background-position: left top;
-background-color: #242645;
+  background-color: #242645;
 color: #fff;
 font-family: "Source Sans Pro";
 position: relative;
@@ -155,6 +155,7 @@ border: none;
 color: #fff;
 background-color: transparent;
 font-size: 12px;
+background-size: auto;
 }
 
 .submitBtn {
@@ -162,4 +163,5 @@ background-color: transparent;
 color: #39f;
 width: 200px;
 }
+
 </style>
