@@ -27,4 +27,14 @@ public class LoginServiceimpl implements LoginService {
         }
         return "error";
     }
+
+    @Override
+    public User forgetpwdService(String username,String name) {
+        return loginDao.selectbyidandname(username,name);
+    }
+
+    @Override
+    public int updateService(User user) {
+        return loginDao.updatepwdbyid(user.getPassword(),user.getUsername());
+    }
 }

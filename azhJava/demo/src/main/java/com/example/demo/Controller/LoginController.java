@@ -37,5 +37,19 @@ public class LoginController {
             return loginService.registService(user);
 
     }
+    @ResponseBody
+    @RequestMapping("/forgetpwd")
+    public User forgetpwd(@RequestParam("username") String username, @RequestParam("name") String name){
+        return loginService.forgetpwdService(username,name);
+
+    }
+    @ResponseBody
+    @RequestMapping("/updatepwd")
+    public int updatepwd(User user){
+
+        return loginService.updateService(user);
+
+    }
+
 }
 
