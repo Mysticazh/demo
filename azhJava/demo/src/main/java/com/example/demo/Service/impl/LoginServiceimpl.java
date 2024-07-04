@@ -13,7 +13,7 @@ public class LoginServiceimpl implements LoginService {
     @Override
     public User loginService(User user) {
         User nowUser=loginDao.getUserbypwd(user.getUsername(),user.getPassword());
-        return nowUser;
+        return nowUser; 
     }
 
     @Override
